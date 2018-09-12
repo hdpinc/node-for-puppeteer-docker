@@ -53,4 +53,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip3 install awscli --upgrade --user
 
+ENV PATH ~/.local/bin:$PATH
+
 CMD ["node"]
