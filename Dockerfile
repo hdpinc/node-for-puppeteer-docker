@@ -1,6 +1,12 @@
 # https://github.com/GoogleChrome/puppeteer/issues/290
 
-FROM node:8
+FROM node:10
+
+RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
+        && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
+        && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
+        && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
+        && rm yarn-v$YARN_VERSION.tar.gz
 
 RUN apt-get update && apt-get install -y \
         gconf-service \
@@ -40,13 +46,15 @@ RUN apt-get update && apt-get install -y \
         libnss3 \
         lsb-release \
         xdg-utils \
-        wget \
+        wget
 
-        # 日本語フォントをインストール
+# 日本語フォントをインストール
+RUN apt-get install -y \
         fonts-ipafont-gothic \
-        fonts-ipafont-mincho \
+        fonts-ipafont-mincho
 
-        # aws-cli をインストール
+# aws-cli をインストール
+RUN apt-get install -y \
         python3-dev \
         python3-setuptools \
         python3-pip
