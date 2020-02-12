@@ -1,6 +1,6 @@
 # https://github.com/GoogleChrome/puppeteer/issues/290
 
-FROM node:10
+FROM node:12
 
 RUN apt-get update && apt-get install -y \
         gconf-service \
